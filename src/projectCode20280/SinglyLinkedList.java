@@ -6,6 +6,25 @@ public class SinglyLinkedList<E> implements List<E> {
 
 	private class Node<E> {
 		/// TODO
+		private E element; //the element stored at this node
+		private Node<E> next; //the next node in the list
+
+		public Node(E e, Node<E> n){ //method to create a node
+			element= e; //element of new node
+			next= n; //next node after new node
+		}
+
+		public E getElement(){ //getter method to return element
+			return element;
+		}
+
+		public Node<E> getNext(){ //getter method to return next node
+			return next;
+		}
+
+		public void setNext(Node<E> n){ //setter method to set next node
+			next= n;
+		}
 	}
 	
 	@Override
