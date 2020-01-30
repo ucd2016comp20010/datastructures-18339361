@@ -4,6 +4,9 @@ import java.util.Iterator;
 
 public class SinglyLinkedList<E> implements List<E> {
 
+	private Node<E> head;
+	private int size;
+
 	private class Node<E> {
 		/// TODO
 		private E element; //the element stored at this node
@@ -77,15 +80,27 @@ public class SinglyLinkedList<E> implements List<E> {
 	}
 
 	@Override
-	public void addFirst(E e) {
+	public void addFirst(E e) { //adding new node to start of list
 		// TODO Auto-generated method stub
-		
+		head= new Node<E>(e, head); //head points to new start of list
+		size++; //size of list incremented
 	}
 
 	@Override
 	public void addLast(E e) {
 		// TODO Auto-generated method stub
-		
+		Node<E> newest= new Node<E>(e, null);
+		Node<E> last= head;
+		if(last== null){
+			head= newest;
+		}
+		else{
+			while(last.getNext() != null){
+				last= last.getNext();
+			}
+			last.setNext(newest);
+		}
+		size++;
 	}
 	
 	public static void main(String[] args) {
