@@ -1,0 +1,31 @@
+package com.company;
+
+import java.util.Queue;
+
+public class LinkedCircularQueue<E> implements Queue<E> {
+    CircularlyLinkedList<E> list = new CircularlyLinkedList<E>();
+
+    @Override
+    public int size() {
+        return list.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return list.isEmpty();
+
+    }
+    
+    public void enqueue(E e) {
+        list.addLast(e);
+    }
+
+    public E first() {
+        return list.get(0);
+    }
+
+    public E dequeue() {
+        return list.removeFirst();
+    }
+    
+}
