@@ -1,0 +1,89 @@
+package com.company;
+
+import java.util.Stack;
+
+public class ArrayStack<E> extends Stack<E> {
+    private E[] arrayStack;		
+    private int stackIndex = -1;
+
+
+    @SuppressWarnings({"unchecked"})
+    public ArrayStack(int sizeOfStack){
+        arrayStack = (E[])new Object[sizeOfStack];	
+    }
+    
+    @Override
+    public int size() {
+        return stackIndex + 1;
+    }
+
+    @Override
+    public boolean isEmpty(){
+        return stackIndex == -1;	
+    }
+
+    @Override
+    public void push(E e) throws IllegalStateException {
+        if (stackIndex == arrayStack.length){
+            throw new IllegalStateException("Stack Full");
+        }
+        stackIndex++;
+        arrayStack[stackIndex] = e;	
+    }
+
+    public E top(){
+        return (stackIndex == -1)? null:arrayStack[stackIndex];
+    }
+
+    @Override
+    public E pop() {
+        if(stackIndex == -1){
+            return null;
+        }
+        E lastElement = arrayStack[stackIndex];	
+        arrayStack[stackIndex] = null;
+        stackIndex--;	
+        return lastElement;
+    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder("(");
+        for (E element : arrayStack){
+            if (element == null){
+                break;
+            }
+            str.append(element).append(", ");
+        }
+        return str.append(")").toString();
+    }
+
+    public void reverseStack(E[] stack){
+        Stack<E> newStack = new ArrayStack<>(stack.length);
+        for (int i = 0; i < stack.length; i++){
+            newStack.push(stack[i]);
+        }
+        for (int i = 0; i < stack.length;i++){
+            stack[i] = newStack.pop();
+        }
+    }
+    
+    public static void main(String[] args) {
+        ArrayStack<Integer> S = new ArrayStack<>(10);
+        S.push(5);S.push(3);
+        System.out.println(S.size());
+        System.out.println(S.pop());
+        System.out.println(S.isEmpty());
+        System.out.println(S.pop());
+        System.out.println(S.isEmpty());
+        System.out.println(S.pop());
+        S.push(7);S.push(9);
+        System.out.println(S.top());
+        S.push(4);
+        System.out.println(S.size());
+        System.out.println(S.pop());
+        S.push(6);
+        S.push(8);
+        System.out.println(S.pop());
+        System.out.println(S.toString());
+    }
+}
