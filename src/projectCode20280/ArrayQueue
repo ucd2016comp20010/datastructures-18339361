@@ -1,0 +1,151 @@
+package com.company;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Queue;
+
+public class ArrayQueue<E> implements Queue<E> {
+    private E[] arrayQueue;
+    private int queueIndex = -1;
+    private int topQueue;
+    private int size;
+
+    @SuppressWarnings({"unchecked"})
+    public ArrayQueue(int capacity){
+        arrayQueue = (E[]) new Object[capacity];
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return null;
+    }
+
+    public void enqueue(E e) {
+        if (size() == arrayQueue.length){
+            throw new IllegalStateException("Queue Full");
+        }
+        queueIndex = (queueIndex+1) % arrayQueue.length;
+        arrayQueue[queueIndex] = e;
+        size++;
+    }
+
+    public E first() {
+        return arrayQueue[topQueue];
+    }
+
+    public E dequeue() {
+        if (isEmpty()) return null;
+        E elem = arrayQueue[topQueue];
+        arrayQueue[topQueue] = null;
+        topQueue = topQueue+1 % arrayQueue.length;
+        size--;
+        return elem;
+    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder("(");
+        for (int i = 0; i < arrayQueue.length;i++){
+            if (arrayQueue[i] != null){
+                str.append(arrayQueue[i]).append(", ");
+            }
+        }
+        str.append(")");
+        return str.toString();
+    }
+
+    public static void main(String[] args) {
+        ArrayQueue<Integer> que = new ArrayQueue<Integer>(10);
+        que.enqueue(4);
+        que.enqueue(5);
+        que.enqueue(6);
+        que.dequeue();
+        que.dequeue();
+        que.enqueue(10);
+        System.out.println(que);
+    }
+
+    @Override
+    public boolean add(E e) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public boolean offer(E e) {
+        return false;
+    }
+
+    @Override
+    public E remove() {
+        return null;
+    }
+
+    @Override
+    public E poll() {
+        return null;
+    }
+
+    @Override
+    public E element() {
+        return null;
+    }
+
+    @Override
+    public E peek() {
+        return null;
+    }
+}
